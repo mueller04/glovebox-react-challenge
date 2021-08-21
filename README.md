@@ -11,8 +11,9 @@ Clone this repo and add the following functionality to this React App. Once you 
 3. Group the records in the policies array by `carrierID` then render one list for each carrier - with each list containing the policies associated with that carrier.
 4. Style the page with some basic css to make it visually appealing.
 5. Place an edit button on each policy. When clicked show a policy edit form with the following:
-	a. Select input with options populated from the `getPolicyTypes` method imported from `data/provider.js`. The default option selected should reflect the current policy type.
-	b. Save button that when pressed persists the policy type update into the policies redux store and hides the edit form.
+
+	- Select input with options populated from the `getPolicyTypes` method imported from `data/provider.js`. The default option selected should reflect the current policy type.
+	- Save button that when pressed persists the policy type update into the policies redux store and hides the edit form.
 
 ## Requirements
 
