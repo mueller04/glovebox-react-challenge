@@ -2,7 +2,7 @@
 
 ## Instructions
 
-Clone this repo and add the following functionality to this React App. Once you are finished, submit your updates as a pull request.
+Fork this repo and add the following functionality to this React App. Once you are finished, send us a link to your fork.
 
 ## Objectives
 
