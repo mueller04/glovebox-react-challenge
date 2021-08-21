@@ -1,5 +1,9 @@
 # GloveBox React Challenge
 
+## Instructions
+
+Clone this repo and add the following functionality to this React App. Once you are finished, submit your updates as a pull request.
+
 ## Objectives
 
 1. Inside `component/Page.jsx` load a list of policies from the `getPolicies` method imported from `data/provider.js`.
