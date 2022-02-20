@@ -2,15 +2,15 @@ import {useEffect, useState} from 'react'
 import {connect, useSelector} from 'react-redux'
 import provider from '../data/provider'
 import Form from './Form'
+import Carriers from './Carriers'
 
-const Page = ({showPolicyForm, setPolicies, setPolicyTypes, setShowPolicyForm}) => {
+const Page = ({showPolicyForm, setShowPolicyForm, setPolicies, setPolicyTypes}) => {
 
 	const defaultPolicyForm = {selectedPolicy: {policyType: '', policyNum: ''}}
 
 	const [policyForm, setPolicyForm] = useState(defaultPolicyForm);
 	const [lastEditRecordId, setLastEditRecordId] = useState();
 
-	const policies = useSelector((state) => state.policies)
 	const policyTypes = useSelector((state) => state.policyTypes)
 
 	useEffect(()=>{
@@ -23,25 +23,6 @@ const Page = ({showPolicyForm, setPolicies, setPolicyTypes, setShowPolicyForm}) 
 			setPolicyTypes(policyTypes)
 		})()
 	})
-
-	const createPolicyMap = (policies) => {
-		const carrierPolicyMap = new Map()
-
-		policies.forEach(policy => {
-
-			if (!carrierPolicyMap.get(policy.carrierID)) {
-				carrierPolicyMap.set(policy.carrierID, [])
-			}
-	
-			carrierPolicyMap.get(policy.carrierID).push({
-				policyNumber: policy.policyNumber,
-				type: policy.type,
-				primaryHolder: policy.primaryHolder,
-				agencyName: policy.agencyName
-			})
-		})
-		return carrierPolicyMap
-	}
 
 	const showForm = (recordId, policyType, policyNum) => {
 
@@ -58,36 +39,10 @@ const Page = ({showPolicyForm, setPolicies, setPolicyTypes, setShowPolicyForm}) 
 		setLastEditRecordId(recordId)
 	}
 
-	const carrierPolicyMap = createPolicyMap(policies)
-
 	return (
 		<div className="page">
-			<h2>Carriers</h2>
-
-			{[...carrierPolicyMap].map(carrierPolicies => {
-				const carrierId = carrierPolicies[0]
-				const policies = carrierPolicies[1]
-
-				const policyTableRows = policies.map(policy => {
-					const policyNum = policy.policyNumber
-					const policyTypeId = policy.type.id
-					const key = policyNum + policyTypeId
-					const primaryHolder = policy.primaryHolder
-					return (
-						<li key={key}>
-							{policyNum}, {policy.type.name}, {primaryHolder.firstName} {primaryHolder.lastName}, {policy.agencyName} 
-							<button onClick={() => showForm(key, policyTypeId, policyNum)}>Edit</button>
-						</li>
-					)	
-				})
-
-				return (
-					<div key={carrierId}>
-						<h3>{carrierId}</h3>
-						<ul>{policyTableRows}</ul>
-					</div>
-				)
-			})}
+		
+			<Carriers showForm={showForm}></Carriers>
 
 			{
 				showPolicyForm ? 

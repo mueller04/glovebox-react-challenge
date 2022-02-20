@@ -16,10 +16,8 @@ const Form = ({selectedPolicy, policyTypes, setPolicyTypeForRecord}) => {
     }, [selectedPolicy])
 
     const handleOnChange = (e) => {
-        console.log(e.target.value)
         const newPolicyTypeId = e.target.value
         setNewPolicyTypeId(newPolicyTypeId)
-        console.log(newPolicyTypeId)
         setPolicyTypeForRecord(newPolicyTypeId, currentPolicy)
       }
 
