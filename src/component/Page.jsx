@@ -40,7 +40,7 @@ const Page = ({showPolicyForm, setShowPolicyForm, setPolicies, setPolicyTypes}) 
 	}
 
 	return (
-		<div className="page">
+		<div style={{marginLeft: '2rem'}}>
 		
 			<Carriers showForm={showForm}></Carriers>
 

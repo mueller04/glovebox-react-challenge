@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "preinstall":"cd $(pwd)"
+    "preinstall": "cd $(pwd)"
   },
   "eslintConfig": {
     "extends": [

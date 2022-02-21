@@ -2,6 +2,32 @@ import {useSelector} from 'react-redux'
 
 const Carriers = ({showForm}) => {
 
+    const styles = {
+        main: {
+          margin: 0,
+          padding: 0,
+          display: 'flex',
+          listStyleType: 'none'
+       },
+       row: {
+          margin: '1rem',
+          padding: '5px',
+          borderRadius: '7pt',
+          background: '#87dbff',
+          flex: 6,
+          order: 2,
+          flexDirection: 'column'
+       },
+       button: {
+          display: 'flex',
+          justifyContent: 'center',
+          margin: '4px',
+          padding: '5px',
+          borderRadius: '20pt',
+          background: '#629cb5',
+       }
+     }
+
 	const policies = useSelector((state) => state.policies)
 
     const createPolicyMap = (policies) => {
@@ -25,34 +51,39 @@ const Carriers = ({showForm}) => {
 
 	const carrierPolicyMap = createPolicyMap(policies)
 
-	return (<>
-        <h2>Carriers</h2>
+	return (
+        <div>
+            <h2>Carriers</h2>
 
-        {[...carrierPolicyMap].map(carrierPolicies => {
-            const carrierId = carrierPolicies[0]
-            const policies = carrierPolicies[1]
+            {[...carrierPolicyMap].map(carrierPolicies => {
+                const carrierId = carrierPolicies[0]
+                const policies = carrierPolicies[1]
 
-            const policyTableRows = policies.map(policy => {
-                const policyNum = policy.policyNumber
-                const policyTypeId = policy.type.id
-                const key = policyNum + policyTypeId
-                const primaryHolder = policy.primaryHolder
+                const policyTableRows = policies.map(policy => {
+                    const policyNum = policy.policyNumber
+                    const policyTypeId = policy.type.id
+                    const key = policyNum + policyTypeId
+                    const primaryHolder = policy.primaryHolder
+                    return (
+                            <li key={key} style={styles.row}>
+                                <div>
+                                    {policyNum}, {policy.type.name}, {primaryHolder.firstName} {primaryHolder.lastName}, {policy.agencyName} 
+                                </div>
+                                <div style={styles.button}>
+                                    <button onClick={() => showForm(key, policyTypeId, policyNum)}>Edit</button>
+                                </div>
+                            </li>
+                    )	
+                })
+
                 return (
-                    <li key={key}>
-                        {policyNum}, {policy.type.name}, {primaryHolder.firstName} {primaryHolder.lastName}, {policy.agencyName} 
-                        <button onClick={() => showForm(key, policyTypeId, policyNum)}>Edit</button>
-                    </li>
-                )	
-            })
-
-            return (
-                <div key={carrierId}>
-                    <h3>{carrierId}</h3>
-                    <ul>{policyTableRows}</ul>
-                </div>
-            )
-        })}
-    </>)
+                    <div key={carrierId}>
+                        <h3>{carrierId}</h3>
+                        <ul style={styles.main}>{policyTableRows}</ul>
+                    </div>
+                )
+            })}
+        </div>)
 }
 
 

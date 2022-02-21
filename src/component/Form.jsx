@@ -4,6 +4,19 @@ import {connect} from 'react-redux'
 
 const Form = ({selectedPolicy, policyTypes, setPolicyTypeForRecord}) => {
 
+    const styles = {
+       select: {
+          display: 'flex',
+          justifyContent: 'center',
+          margin: '4px',
+          padding: '5px',
+          borderRadius: '20pt',
+          width: '20rem',
+          height: '2.5rem',
+          background: '#629cb5',
+       }
+     }
+
 	const [currentPolicy, setCurrentPolicy] = useState(selectedPolicy);
 	const [newPolicyTypeId, setNewPolicyTypeId] = useState(selectedPolicy.policyType);
 
@@ -23,7 +36,7 @@ const Form = ({selectedPolicy, policyTypes, setPolicyTypeForRecord}) => {
 
 
     return (
-        <select value={newPolicyTypeId} onChange={handleOnChange}>
+        <select value={newPolicyTypeId} onChange={handleOnChange} style={styles.select}>
             {policyTypes.map(policyType => { 
             return (
                 <option 
